@@ -1,0 +1,727 @@
+﻿<UserControl
+    x:Class="VK_Module.MVVM.View.VKModuleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VK_Module.MVVM.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="480"
+    d:DesignWidth="800"
+    Background="#F5F5F5"
+    mc:Ignorable="d">
+    <StackPanel Margin="0,0,0,0">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="28"
+                FontWeight="DemiBold"
+                Foreground="#333333"
+                Text="Модуль ВКонтакте"
+                TextAlignment="Center" />
+            <Image
+                Width="60"
+                Height="60"
+                Margin="10,0,0,0"
+                Source="/MVVM/View/vkIcon.png" />
+        </StackPanel>
+
+        <StackPanel
+            Height="50"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <TextBlock
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="24"
+                FontWeight="DemiBold"
+                Foreground="#333333"
+                Text="Загрузка данных"
+                TextAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+            Height="50"
+            Margin="0,5,0,0"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Ссылки на группы ВК"
+                        TextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="SelectGroupsFile"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="SelectGroupLinksLoadClick"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="SelectGroupsFile"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="SelectGroupsFile"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Выбрать"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+
+            <Border
+                Width="175"
+                Height="40"
+                Margin="5,0,0,0">
+                <TextBlock
+                    Name="GroupsState"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    FontWeight="DemiBold"
+                    Foreground="#7038FF"
+                    Text="Состояние: Отсутствуют"
+                    TextAlignment="Center" />
+            </Border>
+
+        </StackPanel>
+
+        <StackPanel
+            Height="50"
+            Margin="0,5,0,0"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Диапазон дат объявлений"
+                        TextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border
+                Height="40"
+                Margin="5"
+                VerticalAlignment="Center"
+                Background="#CCCCCC"
+                BorderBrush="#333333"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <TextBox
+                    x:Name="FromDateTextBox"
+                    Width="125"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="#333333"
+                    LostFocus="FromDateTextBoxLostFocus"
+                    PreviewMouseLeftButtonDown="FromDateTextBoxLMClick"
+                    Text="Дата от ДД/ММ/ГГГГ"
+                    TextAlignment="Center"
+                    TextChanged="FromDateTextBoxTextChanged" />
+            </Border>
+
+            <Border
+                Height="40"
+                VerticalAlignment="Center"
+                Background="#CCCCCC"
+                BorderBrush="#333333"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <TextBox
+                    x:Name="ToDateTextBox"
+                    Width="125"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="#333333"
+                    LostFocus="ToDateTextBoxLostFocus"
+                    PreviewMouseLeftButtonDown="ToDateTextBoxLMClick"
+                    Text="Дата до ДД/ММ/ГГГГ"
+                    TextAlignment="Center"
+                    TextChanged="ToDateTextBoxTextChanged" />
+            </Border>
+
+            <Border
+                Name="UseDateBorder"
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="UseDateFilter"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="UseDateFilterClick"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="UseDateFilter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="UseDateFilter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="Использовать фильтр"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+        </StackPanel>
+
+        <StackPanel
+            Height="50"
+            Margin="0,5,0,0"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Игнорирование по имени"
+                        TextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="SelectNames"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="SelectNamesFilterClick"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="SelectNames"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="SelectNames"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Выбрать имена"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+
+            <Border
+                Name="UseNameBorder"
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="UseNameFilter"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="UseNameFilterClick"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="UseNameFilter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="UseNameFilter"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        Text="Использовать фильтр"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+
+            <Border
+                Width="175"
+                Height="40"
+                Margin="5,0,0,0">
+                <TextBlock
+                    Name="NamesState"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    FontWeight="DemiBold"
+                    Foreground="#7038FF"
+                    Text="Состояние: Отсутствуют"
+                    TextAlignment="Center" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel
+            Height="50"
+            Margin="0,5,0,0"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="LoadFiles"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="LoadButtonClick"
+                    Style="{StaticResource CommandButton}">
+                    <TextBlock
+                        Margin="5,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Загрузить в базу"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5"
+                VerticalAlignment="Center"
+                Background="#CCCCCC"
+                BorderBrush="#333333"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <TextBox
+                    x:Name="AdvertisementCountTextBox"
+                    Width="200"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Foreground="#333333"
+                    LostFocus="AdvertisementCountLostFocus"
+                    PreviewMouseLeftButtonDown="AdvertisementCountLMClick"
+                    Text="Желаемое число объявлений"
+                    TextAlignment="Center"
+                    TextChanged="AdvertisementCountTextChanged" />
+            </Border>
+        </StackPanel>
+        <StackPanel
+            Height="50"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <TextBlock
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="24"
+                FontWeight="DemiBold"
+                Foreground="#333333"
+                Text="Экспорт данных"
+                TextAlignment="Center" />
+        </StackPanel>
+        <StackPanel
+            Height="50"
+            Background="#E0E0E0"
+            Orientation="Horizontal">
+            <StackPanel.Effect>
+                <DropShadowEffect
+                    BlurRadius="10"
+                    Direction="0"
+                    Opacity="0.5"
+                    ShadowDepth="3"
+                    Color="#7038FF" />
+            </StackPanel.Effect>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="ExportButton"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="ExportButton_Click"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="ExportButton"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="ExportButton"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Опубликовать данные"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+            <Border
+                Width="200"
+                Height="40"
+                Margin="5,0,0,0"
+                VerticalAlignment="Center"
+                Background="#B7A3FF"
+                BorderBrush="#583CB2"
+                BorderThickness="2"
+                CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </Border.Effect>
+                <Button
+                    Name="OpenExprotLinksButton"
+                    Width="200"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="SelectGroupLinksUploadClick"
+                    Style="{StaticResource CommandButton}">
+                    <Button.Resources>
+                        <Storyboard x:Key="ButtonClickAnimation">
+                            <DoubleAnimation
+                                Storyboard.TargetName="OpenExprotLinksButton"
+                                Storyboard.TargetProperty="Opacity"
+                                From="1"
+                                To="0.5"
+                                Duration="0:0:0.1" />
+                            <DoubleAnimation
+                                BeginTime="0:0:0.1"
+                                Storyboard.TargetName="OpenExprotLinksButton"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.5"
+                                To="1"
+                                Duration="0:0:0.1" />
+                        </Storyboard>
+                    </Button.Resources>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Text="Открыть панель ссылок"
+                        TextAlignment="Center" />
+                </Button>
+            </Border>
+            <Border
+                Width="175"
+                Height="40"
+                Margin="5,0,0,0">
+                <TextBlock
+                    Name="ExportLinksState"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    FontWeight="DemiBold"
+                    Foreground="#7038FF"
+                    Text="Состояние: Отсутствуют"
+                    TextAlignment="Center" />
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

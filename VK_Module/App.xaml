@@ -1,0 +1,52 @@
+﻿<Application
+    x:Class="VK_Module.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VK_Module"
+    xmlns:view="clr-namespace:VK_Module.MVVM.View"
+    xmlns:viewModel="clr-namespace:VK_Module.MVVM.Viewmodel"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/CommandButtonsTheme.xaml" />
+                <ResourceDictionary Source="Theme/TextboxTheme.xaml" />
+                <ResourceDictionary Source="Theme/VKGroupTextBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/SavePathTextboxTheme.xaml" />
+                <ResourceDictionary Source="Theme/UploadAdressTextboxTheme.xaml" />
+                <ResourceDictionary Source="Theme/FromDateFilter.xaml" />
+                <ResourceDictionary Source="Theme/ToDateFilter.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:VKViewModel}">
+                <view:VKModuleView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:DiscoveryViewModel}">
+                <view:DiscoveryView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ConfigurationView}">
+                <view:ConfigurationView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
+                <view:SearchView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:OKViewModel}">
+                <view:OKModuleView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CianViewModel}">
+                <view:CianView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:HomepageViewModel}">
+                <view:HomepageView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

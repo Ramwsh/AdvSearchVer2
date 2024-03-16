@@ -1,0 +1,1083 @@
+﻿<Window
+    x:Class="VK_Module.MVVM.View.AdvertisementView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VK_Module.MVVM.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AdvertisementView"
+    Width="1050"
+    Height="600"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseDown="MovingWindow"
+    ResizeMode="NoResize"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        Background="#F5F5F5"
+        BorderBrush="#333333"
+        BorderThickness="4"
+        CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="155" />
+                <RowDefinition Height="35" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="22"
+                FontWeight="Bold"
+                Foreground="Black"
+                Text="{Binding Advertisement.Id}">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="0.5"
+                        ShadowDepth="3"
+                        Color="Black" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <StackPanel
+                Grid.Row="1"
+                Width="800"
+                Height="175"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+                <Border
+                    Width="200"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#B7A3FF"
+                    BorderBrush="#583CB2"
+                    BorderThickness="2"
+                    CornerRadius="8">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="1"
+                            ShadowDepth="3"
+                            Color="Black" />
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Text="Краткая информация"
+                            TextAlignment="Center">
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                <Border
+                    Width="200"
+                    Height="30"
+                    Margin="130,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#B7A3FF"
+                    BorderBrush="#583CB2"
+                    BorderThickness="2"
+                    CornerRadius="8">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="1"
+                            ShadowDepth="3"
+                            Color="Black" />
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Text="Описание объявления"
+                            TextAlignment="Center">
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="2"
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <Border
+                    Width="240"
+                    Height="150"
+                    Margin="-15,0,0,0"
+                    Background="#E0E0E0"
+                    BorderBrush="#333333"
+                    BorderThickness="3"
+                    CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Direction="0"
+                            Opacity="1"
+                            ShadowDepth="3"
+                            Color="Black" />
+                    </Border.Effect>
+                    <StackPanel>
+                        <Border
+                            Width="200"
+                            Height="30"
+                            Margin="0,18,0,0"
+                            VerticalAlignment="Top"
+                            Background="#B7A3FF"
+                            BorderBrush="#583CB2"
+                            BorderThickness="2"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="5"
+                                    Opacity="1"
+                                    ShadowDepth="3"
+                                    Color="Black" />
+                            </Border.Effect>
+                            <Button
+                                Name="SendEmailButton"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Click="SendEmailButtonClick"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Style="{StaticResource CommandButton}">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    Foreground="Black"
+                                    Text="Отправить по почте"
+                                    TextAlignment="Center">
+                                </TextBlock>
+                                <Button.Resources>
+                                    <Storyboard x:Key="ButtonClickAnimation">
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="SendEmailButton"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="1"
+                                            To="0.5"
+                                            Duration="0:0:0.1" />
+                                        <DoubleAnimation
+                                            BeginTime="0:0:0.1"
+                                            Storyboard.TargetName="SendEmailButton"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0.5"
+                                            To="1"
+                                            Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </Button.Resources>
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Border>
+                        <Border
+                            Width="200"
+                            Height="30"
+                            Margin="0,5,0,0"
+                            Background="#CCCCCC"
+                            BorderBrush="#333333"
+                            BorderThickness="2"
+                            CornerRadius="8">
+                            <TextBox
+                                x:Name="EmailTextBox"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="#333333"
+                                LostFocus="EmailTextBoxLostFocus"
+                                PreviewMouseLeftButtonDown="EmailTextBoxClick"
+                                Text="E-MAIL"
+                                TextAlignment="Center">
+                            </TextBox>
+                        </Border>
+
+                        <Border
+                            Width="200"
+                            Height="30"
+                            Margin="0,5,0,0"
+                            Background="#CCCCCC"
+                            BorderBrush="#333333"
+                            BorderThickness="2"
+                            CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="5"
+                                    Opacity="1"
+                                    ShadowDepth="3"
+                                    Color="Black" />
+                            </Border.Effect>
+                            <TextBox
+                                x:Name="EmailSubjectTextBox"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Foreground="#333333"
+                                LostFocus="SubjectTextBoxLostFocus"
+                                PreviewMouseLeftButtonDown="SubjectTextBoxClick"
+                                Text="Тема письма"
+                                TextAlignment="Center">
+                            </TextBox>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <StackPanel Orientation="Horizontal">
+                    <Border
+                        Width="325"
+                        Height="150"
+                        Margin="5,0,0,0"
+                        Background="#CCCCCC"
+                        BorderBrush="#333333"
+                        BorderThickness="3"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Opacity="1"
+                                ShadowDepth="3"
+                                Color="Black" />
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,4,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Создатель"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Тип жилья"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Число комнат"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Дата"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Состояние"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="90"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="Ссылка"
+                                        TextAlignment="Center" />
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,4,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="{Binding Advertisement.Poster}"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="{Binding Advertisement.HousingType}"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="{Binding Advertisement.RoomCount}"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="{Binding Advertisement.Date, StringFormat=' {0:dd.MM.yyyy}'}"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="#333333"
+                                        Text="{Binding Advertisement.State}"
+                                        TextAlignment="Center" />
+                                </Border>
+                                <Border
+                                    Width="200"
+                                    Height="20"
+                                    Margin="0,3,0,0"
+                                    Background="#F5F5F5"
+                                    BorderBrush="#333333"
+                                    BorderThickness="2"
+                                    CornerRadius="3"
+                                    PreviewMouseLeftButtonDown="LinkTextBlockClick">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontWeight="Bold"
+                                        Foreground="DarkBlue"
+                                        Text="{Binding Advertisement.Link}"
+                                        TextAlignment="Center" />
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border
+                        Width="453"
+                        Height="150"
+                        Margin="5,0,0,0"
+                        Background="#CCCCCC"
+                        BorderBrush="#333333"
+                        BorderThickness="3"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Opacity="1"
+                                ShadowDepth="3"
+                                Color="Black" />
+                        </Border.Effect>
+                        <TextBox
+                            Name="AdvContentTextBox"
+                            Margin="8,10,8,10"
+                            AcceptsReturn="True"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="#333333"
+                            Text="{Binding Advertisement.Description}"
+                            TextWrapping="Wrap"
+                            FontSize="14"
+                            VerticalScrollBarVisibility="Hidden">
+                        </TextBox>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel
+                Grid.Row="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Orientation="Horizontal">
+                <Border
+                    Width="200"
+                    Height="30"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#B7A3FF"
+                    BorderBrush="#583CB2"
+                    BorderThickness="2"
+                    CornerRadius="8">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="5"
+                            Opacity="1"
+                            ShadowDepth="3"
+                            Color="Black" />
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontWeight="Bold"
+                            Text="Фотографии"
+                            TextAlignment="Center">
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4">
+                <ListView
+                    Name="PhotoListView"
+                    Width="775"
+                    Height="270"
+                    d:ItemsSource="{d:SampleData ItemCount=5}"
+                    Background="#CCCCCC"
+                    BorderBrush="#333333"
+                    BorderThickness="2"
+                    ItemsSource="{Binding Images}">
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <Border
+                                Background="#CCCCCC"
+                                BorderBrush="#333333"
+                                BorderThickness="4"
+                                CornerRadius="20">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Opacity="1"
+                                        ShadowDepth="3"
+                                        Color="Black" />
+                                </Border.Effect>
+                            </Border>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Background="Transparent"
+                                BorderBrush="#333333"
+                                BorderThickness="10"
+                                CornerRadius="10">
+                                <Image
+                                    Width="290"
+                                    Height="280"
+                                    Source="{Binding}"
+                                    Stretch="Fill" />
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border
+                                            Name="border"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            BorderThickness="1">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="IsSelected" Value="True" />
+                                                    <Condition Property="IsMouseOver" Value="False" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="border" Property="Background" Value="#B7A3FF" />
+                                                <Setter TargetName="border" Property="CornerRadius" Value="20" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="IsSelected" Value="False" />
+                                                    <Condition Property="IsMouseOver" Value="True" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="border" Property="Background" Value="#B7A3FF" />
+                                                <Setter TargetName="border" Property="CornerRadius" Value="20" />
+                                            </MultiTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+            </StackPanel>
+            <StackPanel
+                Grid.Row="4"
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <StackPanel>
+                    <Border
+                        Width="240"
+                        Height="100"
+                        Margin="-15,0,0,0"
+                        Background="#E0E0E0"
+                        BorderBrush="#333333"
+                        BorderThickness="3"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Direction="0"
+                                Opacity="1"
+                                ShadowDepth="3"
+                                Color="Black" />
+                        </Border.Effect>
+                        <StackPanel Orientation="Vertical">
+                            <Border
+                                Width="200"
+                                Height="30"
+                                Margin="0,14,0,0"
+                                VerticalAlignment="Top"
+                                Background="#B7A3FF"
+                                BorderBrush="#583CB2"
+                                BorderThickness="2"
+                                CornerRadius="8">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Opacity="1"
+                                        ShadowDepth="3"
+                                        Color="Black" />
+                                </Border.Effect>
+                                <Button
+                                    Name="SendWhatsAppButton"
+                                    Width="200"
+                                    Height="30"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource CommandButton}">
+                                    <TextBlock
+                                        Background="Transparent"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        PreviewMouseLeftButtonDown="SendWATextMessage"
+                                        Text="Отправить по Whats App"
+                                        TextAlignment="Center">
+                                    </TextBlock>
+                                    <Button.Resources>
+                                        <Storyboard x:Key="ButtonClickAnimation">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="SendWhatsAppButton"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="1"
+                                                To="0.5"
+                                                Duration="0:0:0.1" />
+                                            <DoubleAnimation
+                                                BeginTime="0:0:0.1"
+                                                Storyboard.TargetName="SendWhatsAppButton"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0.5"
+                                                To="1"
+                                                Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </Button.Resources>
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="Button.Click">
+                                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </Border>
+
+                            <Border
+                                Width="200"
+                                Height="30"
+                                Margin="0,5,0,0"
+                                Background="#CCCCCC"
+                                BorderBrush="#333333"
+                                BorderThickness="2"
+                                CornerRadius="8">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Opacity="1"
+                                        ShadowDepth="3"
+                                        Color="Black" />
+                                </Border.Effect>
+                                <TextBox
+                                    x:Name="WhatsAppTextBox"
+                                    Width="200"
+                                    Height="30"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Foreground="#333333"
+                                    LostFocus="WhatsAppTextBoxLostFocus"
+                                    PreviewMouseLeftButtonDown="WhatsAppTextBoxClick"
+                                    Text="Номер">
+                                </TextBox>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Width="240"
+                        Height="165"
+                        Margin="-15,5,0,0"
+                        Background="#E0E0E0"
+                        BorderBrush="#333333"
+                        BorderThickness="3"
+                        CornerRadius="10">
+                        <Border.Effect>
+                            <DropShadowEffect
+                                BlurRadius="5"
+                                Direction="0"
+                                Opacity="1"
+                                ShadowDepth="3"
+                                Color="Black" />
+                        </Border.Effect>
+                        <StackPanel Orientation="Vertical">
+                            <Border
+                                Width="200"
+                                Height="30"
+                                Margin="0,9,0,0"
+                                VerticalAlignment="Top"
+                                Background="#B7A3FF"
+                                BorderBrush="#583CB2"
+                                BorderThickness="2"
+                                CornerRadius="8">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Opacity="1"
+                                        ShadowDepth="3"
+                                        Color="Black" />
+                                </Border.Effect>
+                                <Button
+                                    Name="SaveAdvertisementButton"
+                                    Width="200"
+                                    Height="30"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="SaveAdvertisementButtonClick"
+                                    Style="{StaticResource CommandButton}">
+                                    <TextBlock
+                                        Background="Transparent"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        Text="Сохранить изменения"
+                                        TextAlignment="Center">
+                                    </TextBlock>
+                                    <Button.Resources>
+                                        <Storyboard x:Key="ButtonClickAnimation">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="SaveAdvertisementButton"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="1"
+                                                To="0.5"
+                                                Duration="0:0:0.1" />
+                                            <DoubleAnimation
+                                                BeginTime="0:0:0.1"
+                                                Storyboard.TargetName="SaveAdvertisementButton"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0.5"
+                                                To="1"
+                                                Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </Button.Resources>
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="Button.Click">
+                                            <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </Border>
+                            <StackPanel Orientation="Horizontal">
+                                <Border
+                                    Width="75"
+                                    Height="70"
+                                    Margin="20,5,0,0"
+                                    Background="#333333"
+                                    BorderBrush="#333333"
+                                    BorderThickness="3"
+                                    CornerRadius="8">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <Button Name="ImportButton" Click="ImportButton_Click">
+                                        <Image Source="/MVVM/View/importIcon.png" Stretch="Fill" />
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background" Value="#7038FF" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Border
+                                                                x:Name="Border"
+                                                                Background="#333333"
+                                                                CornerRadius="8">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="Border" Property="Background" Value="#CCCCCC" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Resources>
+                                            <Storyboard x:Key="ButtonClickAnimation">
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="ImportButton"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="1"
+                                                    To="0.5"
+                                                    Duration="0:0:0.1" />
+                                                <DoubleAnimation
+                                                    BeginTime="0:0:0.1"
+                                                    Storyboard.TargetName="ImportButton"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="0.5"
+                                                    To="1"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </Button.Resources>
+                                        <Button.Triggers>
+                                            <EventTrigger RoutedEvent="Button.Click">
+                                                <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                                            </EventTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Border>
+                                <Border
+                                    Width="75"
+                                    Height="70"
+                                    Margin="45,5,0,0"
+                                    Background="#333333"
+                                    BorderBrush="#333333"
+                                    BorderThickness="3"
+                                    CornerRadius="8">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="5"
+                                            Opacity="1"
+                                            ShadowDepth="3"
+                                            Color="Black" />
+                                    </Border.Effect>
+                                    <Button Name="RemoveButton" Click="RemoveButton_Click">
+                                        <Image Source="/MVVM/View/deleteIcon.png" Stretch="Fill" />
+                                        <Button.Style>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="Background" Value="#7038FF" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                            <Border
+                                                                x:Name="Border"
+                                                                Background="#333333"
+                                                                CornerRadius="8">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="Border" Property="Background" Value="#CCCCCC" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Resources>
+                                            <Storyboard x:Key="ButtonClickAnimation">
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="RemoveButton"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="1"
+                                                    To="0.5"
+                                                    Duration="0:0:0.1" />
+                                                <DoubleAnimation
+                                                    BeginTime="0:0:0.1"
+                                                    Storyboard.TargetName="RemoveButton"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    From="0.5"
+                                                    To="1"
+                                                    Duration="0:0:0.1" />
+                                            </Storyboard>
+                                        </Button.Resources>
+                                        <Button.Triggers>
+                                            <EventTrigger RoutedEvent="Button.Click">
+                                                <BeginStoryboard Storyboard="{StaticResource ButtonClickAnimation}" />
+                                            </EventTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+                            <Border
+                                Width="200"
+                                Height="30"
+                                Margin="0,5,0,0"
+                                Background="#CCCCCC"
+                                BorderBrush="#333333"
+                                BorderThickness="2"
+                                CornerRadius="8">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="5"
+                                        Opacity="1"
+                                        ShadowDepth="3"
+                                        Color="Black" />
+                                </Border.Effect>
+                                <TextBlock
+                                    Name="CurrentRepositoryTextBox"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="Transparent"
+                                    Foreground="#333333"
+                                    Text="Текущий репозиторий">
+                                </TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <Ellipse
+                Grid.Column="1"
+                Width="50"
+                Height="50"
+                Margin="180,12,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                PreviewMouseLeftButtonDown="Application_Quit">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Offset="1" Color="#00FF0000" />
+                        <GradientStop Offset="0" Color="#FFFF0000" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Effect>
+                    <DropShadowEffect
+                        BlurRadius="5"
+                        Opacity="1"
+                        ShadowDepth="3"
+                        Color="DarkRed" />
+                </Ellipse.Effect>
+            </Ellipse>
+        </Grid>
+    </Border>
+</Window>
